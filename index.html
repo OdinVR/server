@@ -116,7 +116,7 @@
 
                     <div class="text-center" style="position: relative; top: 1%;">
                         <button class = "btn btn-small btn-odin" style = "width: 43.5%"><strong>Launch</strong></button>
-                        <button class = "btn btn-small btn-odin" style = "width: 43.5%"><strong>Update</strong></button>
+                        <button id = "updateButton" class = "btn btn-small btn-odin" style = "width: 43.5%"><strong>Update</strong></button>
                     </div>
                 </div>
             </div>
@@ -150,6 +150,17 @@
 
             $('#sessionid').html('<strong>'+session+'</strong>');
 
+            $('#updateButton').on('click', function() {
+                var data = {
+                    models: [{path: "jupiter.dae", posx: 0, posy: 0, posz: 0, scale: 1, rotx: 0, roty: 0, rotz: 0, spin: false, spinaxis: 'z'}],
+                    skybox: "grid",
+                    skyboxSize: "50",
+                    skyboxPos: "25",
+                    cameraHeight: 1.5
+                };
+                socket.emit('update', data);
+            });
+
             socket.on('new message', function(data) {
 				console.log('message: '+data.message);
 			});
@@ -157,6 +168,7 @@
             socket.on('upload success', function(data) {
                 console.log('Successfully uploaded model: '+data.name);
             });
+
         });
 
         Dropzone.autoDiscover = false;
@@ -181,7 +193,6 @@
         }
 
         $('#upload-widget').dropzone();
-
 
 
     </script>

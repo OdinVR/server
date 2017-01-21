@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 app.post('/upload', upload.any(), function(req, res, next){
     console.log('uploaded: '+req.files[0].originalname+' '+req.files[0].filename);
     fs.createReadStream(req.files[0].path).pipe(unzip.Extract({path:req.files[0].path}));
-	res.send('booty');
+	res.send(req.files[0].originalname.replace('.zip',''));
 });
 
 io.sockets.on('connection', function(socket) {
@@ -33,6 +33,7 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('update', function(data) {
+		console.log(data);
 		console.log('Received update');
 		socket.in(data.room).broadcast.emit('update', data);
 		console.log('Sent update');
