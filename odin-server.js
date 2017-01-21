@@ -3,14 +3,24 @@ var express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
 	port = 6606,
-	currentRoom;
+	currentRoom,
+	multer = require('multer'),
+    unzip = require('unzip'),
+    upload = multer({dest: 'public/models/'})
+	fs = require('fs');
 
 app.use(express.static(__dirname + '/public'));
+app.use('/scripts', express.static(__dirname + '/node_modules/'));
 
 server.listen(port);
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/index.html');
+});
+
+app.post('/upload', upload.any(), function(req, res, next){
+    console.log('uploaded: '+req.files[0].originalname+' '+req.files[0].filename);
+    fs.createReadStream(req.files[0].path).pipe(unzip.Extract({path:req.files[0].path}));
 });
 
 io.sockets.on('connection', function(socket) {

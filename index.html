@@ -1,27 +1,69 @@
 <html>
-	<head>
-		<title>GTFO</title>
 
-		<meta charset="utf-8">
-	  <meta name="viewport" content="width = device-width, initial-scale=1">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	  <link href="css/mdb.min.css" rel="stylesheet">
-	</head>
+<head>
+</head>
 
-	<body id="particles-js">
-		<div class="card" style = "height: 50%; width: 50%">
-			<img src="http://i.imgur.com/QkCPYyB.gif">
-		</div>
+<body>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
-		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	  <script type="text/javascript" src="js/tether.min.js"></script>
-	  <script type="text/javascript" src="js/mdb.min.js"></script>
-		<script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-		<script src="/socket.io/socket.io.js"></script>
-		<script type="text/javascript" src="js/theme.js"></script>
-		<script>particlesJS.load("particles-js", "assets/particlesjs-config.json");</script>
-	</body>
+    <!-- ================================== CODE ================================== -->
+
+    <div class = "container-fluid">
+        <div class="row"> <div class="spacer"></div> </div>
+        <div class="row">
+            <div class = "col-xs-9">
+                <div class = "mpanel scene" id="3dscene">
+                </div>
+            </div>
+
+            <div class = "col-xs-3">
+                <div class = "sidebar mpanel">
+                    <div class="text-center" style="position: relative; top: 1%;">
+                        <form action="/upload" method="post" id="upload-widget" class="dropzone"></form>
+                    </div>
+
+                    <div class = "well property-bin">
+
+                    </div>
+
+                    <div class="text-center" style="position: relative; top: 1%;">
+                        <button class = "btn btn-small btn-cyan" style = "width: 43.5%"><strong>Launch</strong></button>
+                        <button class = "btn btn-small btn-cyan" style = "width: 43.5%"><strong>Update</strong></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================================== CODE ================================== -->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/tether.min.js"></script>
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/dropzone.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+    <script>
+        jQuery(function($) {
+            $('#upload-widget').on('success', function(file, response) {
+                console.log('success');
+            });
+        });
+
+        Dropzone.options.uploadWidget = {
+            acceptedFiles: 'application/zip',
+            createImageThumbnails: false,
+            thumbnailWidth: 0,
+            thumbnailHeight: 0
+        };
+
+    </script>
+
+</body>
+
 </html>

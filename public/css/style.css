@@ -1,1 +1,100 @@
-/* YOUR CUSTOM STYLES */
+body {
+    background-color: #039BE5;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+.scene {
+    height: 97%;
+    background-color: white;
+}
+
+.spacer {
+    height:1%;
+}
+
+.sidebar {
+    height: 97%;
+    background-color: #26A69A;
+}
+
+.mpanel {
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.property-bin {
+    position: relative;
+    top: 2%;
+    left: 5%;
+    height: 83%;
+    width: 90%;
+}
+
+.dropzone {
+    position: relative;
+    background-color: #00ACC1;
+    height: 4%;
+    width: 90%;
+    left: 5%;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s ease 0s;
+}
+
+.dropzone:hover {
+    background-color: #e53935;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.dz-message {
+    color: white;
+    font-weight: bold;
+    position: relative;
+    top: 23%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.dz-details {
+    height: 0px;
+    width: 0px;
+}
+
+.dz-progress {
+    height: 0px;
+    width: 0px;
+}
+
+.dz-image {
+    height: 0px;
+    width: 0px;
+}
+
+.dz-size {
+    visibility: hidden;
+}
+
+.dz-error-message {
+    height: 0px;
+    width: 0px;
+}
+
+.dz-error-mark {
+    height: 0px;
+    width: 0px;
+}
+
+.dz-success-mark {
+    height: 0px;
+    width: 0px;
+}
+
+.dz-preview .dz-file-preview .dz-processing .dz-error .dz-complete {
+    visibility: hidden;
+}
+
+svg {
+    visibility: hidden;
+}
