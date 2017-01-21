@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket) {
 	socket.on('update', function(data) {
 		console.log(data);
 		console.log('Received update');
-		socket.in(data.room).broadcast.emit('update', data);
+		socket.broadcast.to(socket.room).emit('update', data);
 		console.log('Sent update');
 	});
 
