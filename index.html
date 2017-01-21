@@ -179,7 +179,7 @@
                     spin: $("input[id=spin]")[0].value,
                     spinaxis: $("input[id=spinaxis]")[0].value
                 }
-                
+
                 var release = {
                     models: [],
                     skybox: $("input[id=skybox]")[0].value,
@@ -210,12 +210,6 @@
             socket.on('new message', function(data) {
 				console.log('message: '+data.message);
 			});
-
-            socket.on('upload success', function(data) {
-                console.log(data);
-                console.log('Successfully uploaded model: '+data.name);
-                props[data.name.trim()]['path'] = data.path;
-            });
 
             function updateData() {
                 var release = {
@@ -268,6 +262,8 @@
                     var path = response.path.toString();
                     $('#modelMenu').append('<a class="dropdown-item" href="#" onclick="swapPropertyData(this.innerText);">'+name+'<br></a>');
                     props[''+name] = {path: path, posx: 0, posy: 0, posz: 0, scale: 1, rotx: 0, roty: 0, rotz: 0, spin: false, spinaxis: 'Y'};
+                    props[response.name.toString()].path = response.path.toString();
+                    console.log(props);
                     modelNames.push(name);
                 })
             }
