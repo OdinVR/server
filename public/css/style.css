@@ -43,6 +43,7 @@ background: linear-gradient(to right, #02AAB0 , #00CDAC); /* W3C, IE 10+/ Edge, 
     left: 5%;
     height: 83%;
     width: 90%;
+    overflow-y: scroll;
 }
 
 .dropzone {
