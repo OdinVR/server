@@ -1,5 +1,12 @@
 body {
-    background-color: #039BE5;
+
+
+
+    background: #5C258D; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #5C258D , #4389A2); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #5C258D , #4389A2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 }
 
 .container-fluid {
@@ -8,7 +15,7 @@ body {
 
 .scene {
     height: 97%;
-    background-color: white;
+    background-color: black;
 }
 
 .spacer {
@@ -17,7 +24,12 @@ body {
 
 .sidebar {
     height: 97%;
-    background-color: #26A69A;
+
+
+background: #02AAB0; /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #02AAB0 , #00CDAC); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #02AAB0 , #00CDAC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .mpanel {
@@ -45,7 +57,12 @@ body {
 }
 
 .dropzone:hover {
-    background-color: #e53935;
+
+
+    background: #cb2d3e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #cb2d3e , #ef473a); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #cb2d3e , #ef473a);
+
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
@@ -97,4 +114,35 @@ body {
 
 svg {
     visibility: hidden;
+}
+
+.btn-odin {
+
+
+background: #cb2d3e; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #cb2d3e , #ef473a); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #cb2d3e , #ef473a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.btn-odin:hover, .btn-odin:focus {
+
+
+  background: #f85032 !important; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f85032 , #e73827) !important; /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f85032 , #e73827) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.btn-odin.active {
+  background-color: #0b51c5 !important;
+}
+
+i.btn-odin {
+
+
+background: #cb2d3e !important; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #cb2d3e , #ef473a) !important; /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #cb2d3e , #ef473a) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
