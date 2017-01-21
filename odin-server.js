@@ -21,7 +21,7 @@ app.get('/', function(req, res) {
 app.post('/upload', upload.any(), function(req, res, next){
     console.log('uploaded: '+req.files[0].originalname+' '+req.files[0].filename);
     fs.createReadStream(req.files[0].path).pipe(unzip.Extract({path:req.files[0].path}));
-	res.send(req.files[0].originalname.replace('.zip',''));
+	res.send({name: req.files[0].originalname.replace('.zip',''), path: req.files[0].filename});
 });
 
 io.sockets.on('connection', function(socket) {
