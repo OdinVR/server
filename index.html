@@ -168,7 +168,9 @@
 
             $('#updateButton').on('click', function() {
                 var modelname = $('#currentName')[0].innerText;
+                var p = props[modelname.trim()].path;
                 props[modelname.trim()] = {
+                    path: p,
                     posx: parseInt(''+$("input[id=posx]")[0].value),
                     posy: parseInt(''+$("input[id=posy]")[0].value),
                     posz: parseInt(''+$("input[id=posz]")[0].value),
@@ -210,34 +212,6 @@
             socket.on('new message', function(data) {
 				console.log('message: '+data.message);
 			});
-
-            function updateData() {
-                var release = {
-                    models: [],
-                    skybox: $("input[id=skybox]")[0].value,
-                    skyboxSize: $("input[id=skyboxSize]")[0].value,
-                    skyboxPos: $("input[id=skyboxPos]")[0].value,
-                    cameraHeight: $("input[id=cameraHeight]")[0].value
-                }
-
-                for(var i = 0; i<modelNames.length; i++) {
-                    release.models.push({
-                        path: props[modelNames[i]].path,
-                        posx: props[modelNames[i]].posx,
-                        posy: props[modelNames[i]].posy,
-                        posz: props[modelNames[i]].posz,
-                        scale: props[modelNames[i]].scale,
-                        rotx: props[modelNames[i]].rotx,
-                        roty: props[modelNames[i]].roty,
-                        rotz: props[modelNames[i]].posz,
-                        spin: props[modelNames[i]].spin,
-                        spinaxis: props[modelNames[i]].spinaxis
-                    });
-                }
-
-                console.log(release);
-                socket.emit('update', release);
-            }
 
         });
 
