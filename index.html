@@ -168,7 +168,12 @@
 
             $('#updateButton').on('click', function() {
                 var modelname = $('#currentName')[0].innerText;
-                var p = props[modelname.trim()].path;
+                var p;
+
+                for(var i = 0; i<modelNames.length; i++) {
+                    if(modelNames[i].name==modelname) p = modelNames[i].path;
+                }
+
                 props[modelname.trim()] = {
                     path: p,
                     posx: parseInt(''+$("input[id=posx]")[0].value),
@@ -192,16 +197,16 @@
 
                 for(var i = 0; i<modelNames.length; i++) {
                     release.models.push({
-                        path: props[modelNames[i]].path,
-                        posx: props[modelNames[i]].posx,
-                        posy: props[modelNames[i]].posy,
-                        posz: props[modelNames[i]].posz,
-                        scale: props[modelNames[i]].scale,
-                        rotx: props[modelNames[i]].rotx,
-                        roty: props[modelNames[i]].roty,
-                        rotz: props[modelNames[i]].posz,
-                        spin: props[modelNames[i]].spin,
-                        spinaxis: props[modelNames[i]].spinaxis
+                        path: props[modelNames[i].name].path,
+                        posx: props[modelNames[i].name].posx,
+                        posy: props[modelNames[i].name].posy,
+                        posz: props[modelNames[i].name].posz,
+                        scale: props[modelNames[i].name].scale,
+                        rotx: props[modelNames[i].name].rotx,
+                        roty: props[modelNames[i].name].roty,
+                        rotz: props[modelNames[i].name].posz,
+                        spin: props[modelNames[i].name].spin,
+                        spinaxis: props[modelNames[i].name].spinaxis
                     });
                 }
 
@@ -238,7 +243,7 @@
                     props[''+name] = {path: path, posx: 0, posy: 0, posz: 0, scale: 1, rotx: 0, roty: 0, rotz: 0, spin: false, spinaxis: 'Y'};
                     props[response.name.toString()].path = response.path.toString();
                     console.log(props);
-                    modelNames.push(name);
+                    modelNames.push({name: name, path: path});
                 })
             }
         }
