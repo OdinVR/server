@@ -67,6 +67,29 @@ background: linear-gradient(to right, #02AAB0 , #00CDAC); /* W3C, IE 10+/ Edge, 
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+.dropzone2 {
+    color: white;
+    font-weight: bold;
+    position: relative;
+    background-color: #00ACC1;
+    height: 4%;
+    width: 90%;
+    left: 5%;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s ease 0s;
+}
+
+.dropzone2:hover {
+
+
+    background: #cb2d3e; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #cb2d3e , #ef473a); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #cb2d3e , #ef473a);
+
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
 .dz-message {
     color: white;
     font-weight: bold;

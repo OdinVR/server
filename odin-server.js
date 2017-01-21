@@ -21,23 +21,15 @@ app.get('/', function(req, res) {
 app.post('/upload', upload.any(), function(req, res, next){
     console.log('uploaded: '+req.files[0].originalname+' '+req.files[0].filename);
     fs.createReadStream(req.files[0].path).pipe(unzip.Extract({path:req.files[0].path}));
+	res.send('booty');
 });
 
 io.sockets.on('connection', function(socket) {
 	socket.on('room', function(data) {
-		var newRoom = data.newRoom;
-		currentRoom = data.currentRoom;
-		if(currentRoom != undefined) {
-			socket.leave(currentRoom);
-			console.log('New client connected: '+socket.id+' Room: '+newRoom);
-			//io.in(currentRoom).emit('new message', {currentRoom, message: '<strong>A user has disconnected from the room.</strong>'});
-			socket.room = newRoom;
-		}
-		else {
-			socket.room = "Global Chat";
-		}
-		socket.join(newRoom);
-		socket.emit('new message', {newRoom, message: ('Joined room: '+newRoom)});
+		socket.room = data.room;
+		socket.join(data.room);
+		socket.emit('new message', {message: ('Joined room: '+data.room)});
+		console.log('Client connected: '+socket.id+' Room: '+socket.room);
 	});
 
 	socket.on('update', function(data) {
@@ -53,8 +45,7 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('disconnect', function() {
-		if(currentRoom === undefined) currentRoom = "Global Chat";
-		console.log('Client disconnected: '+socket.id+' Room: '+newRoom);
+		console.log('Client disconnected: '+socket.id+' Room: '+socket.room);
 		//io.in(currentRoom).emit('new message', {currentRoom, message: '<strong>A user has disconnected from the room.</strong>'});
 	});
 });
