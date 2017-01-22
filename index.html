@@ -300,55 +300,6 @@
                 a.click();
             }
 
-            function startRead()
-            {
-              // obtain input element through DOM
-
-              var file = document.getElementById('file').files[0];
-              if(file)
-            	{
-                getAsText(file);
-              }
-            }
-
-            function getAsText(readFile)
-            {
-            	var reader;
-            	try
-            	{
-                reader = new FileReader();
-            	}catch(e)
-            	{
-            		document.getElementById('output').innerHTML =
-            			"Error: seems File API is not supported on your browser";
-            	  return;
-              }
-
-              // Read file into memory as UTF-8
-              reader.readAsText(readFile, "UTF-8");
-
-              // Handle progress, success, and errors
-              reader.onload = loaded;
-              reader.onerror = errorHandler;
-            }
-
-            function loaded(evt)
-            {
-              // Obtain the read file data
-              var fileString = evt.target.result;
-              console.log(fileString);
-              receiveSceneData(JSON.parse(fileString));
-            }
-
-            function errorHandler(evt)
-            {
-              if(evt.target.error.code == evt.target.error.NOT_READABLE_ERR)
-            	{
-                // The file could not be read
-            		console.log("Error reading file...");
-              }
-            }
-
             var height = $("#3dscene").height();
     		var width = $("#3dscene").width();
     	    renderInPanel(width,height);
@@ -421,6 +372,59 @@
                 $("input[id=spin]")[0].value = props[newModel.trim()].spin;
                 $("input[id=spinaxis]")[0].value = props[newModel.trim()].spinaxis;
             }
+        }
+
+    </script>
+
+        <script>
+
+        function startRead()
+        {
+          // obtain input element through DOM
+
+          var file = document.getElementById('file').files[0];
+          if(file)
+            {
+            getAsText(file);
+          }
+        }
+
+        function getAsText(readFile)
+        {
+            var reader;
+            try
+            {
+            reader = new FileReader();
+            }catch(e)
+            {
+                document.getElementById('output').innerHTML =
+                    "Error: seems File API is not supported on your browser";
+              return;
+          }
+
+          // Read file into memory as UTF-8
+          reader.readAsText(readFile, "UTF-8");
+
+          // Handle progress, success, and errors
+          reader.onload = loaded;
+          reader.onerror = errorHandler;
+        }
+
+        function loaded(evt)
+        {
+          // Obtain the read file data
+          var fileString = evt.target.result;
+          console.log(JSON.parse(fileString));
+          receiveSceneData(JSON.parse(fileString));
+        }
+
+        function errorHandler(evt)
+        {
+          if(evt.target.error.code == evt.target.error.NOT_READABLE_ERR)
+            {
+            // The file could not be read
+                console.log("Error reading file...");
+          }
         }
 
     </script>
