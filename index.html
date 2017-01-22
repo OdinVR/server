@@ -167,9 +167,10 @@
             $('#sessionid').html('<strong>'+session+'</strong>');
 
             $('#updateButton').on('click', function() {
+
                 var modelname = $('#currentName')[0].innerText;
                 var p;
-
+                swapPropertyData(modelname);
                 for(var i = 0; i<modelNames.length; i++) {
                     if(modelname.trim()==modelNames[i].name.trim()) p = modelNames[i].path;
                 }
