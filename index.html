@@ -190,10 +190,10 @@
 
                 var release = {
                     models: [],
-                    skybox: $("input[id=skybox]")[0].value,
-                    skyboxSize: $("input[id=skyboxSize]")[0].value,
-                    skyboxPos: $("input[id=skyboxPos]")[0].value,
-                    cameraHeight: $("input[id=cameraHeight]")[0].value
+                    skybox: parseInt($("input[id=skybox]")[0].value),
+                    skyboxSize: parseInt($("input[id=skyboxSize]")[0].value),
+                    skyboxPos: parseInt($("input[id=skyboxPos]")[0].value),
+                    cameraHeight: parseInt($("input[id=cameraHeight]")[0].value)
                 }
 
                 for(var i = 0; i<modelNames.length; i++) {
