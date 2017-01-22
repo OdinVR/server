@@ -414,8 +414,43 @@
         {
           // Obtain the read file data
           var fileString = evt.target.result;
-          console.log(JSON.parse(fileString));
-          receiveSceneData(JSON.parse(fileString));
+          var data = JSON.parse(fileString);
+          console.log(data);
+          receiveSceneData(data);
+
+          for(var i = 0; i<data.models.length; i++) {
+
+            modelNames[i]={name: data.models[i].path.trim(), path: data.models[i].path.trim()};
+            props[data.models[i].path.trim()] = {
+                path: data.models[i].path.trim(),
+                posx: data.models[i].posx,
+                posy: data.models[i].posy,
+                posz: data.models[i].posz,
+                scale: data.models[i].scale,
+                rotx: data.models[i].rotx,
+                roty: data.models[i].roty,
+                rotz: data.models[i].rotz,
+                spin: data.models[i].spin,
+                spinaxis: data.models[i].spinaxis
+            };
+            $('#modelMenu').append('<a class="dropdown-item" href="#" onclick="swapPropertyData(this.innerText);">'+data.models[i].path.trim()+'<br></a>');
+          }
+
+          $("input[id=skybox]")[0].value = data.skybox;
+          $("input[id=skyboxSize]")[0].value = data.skyboxSize;
+          $("input[id=skyboxPos]")[0].value = data.skyboxPos;
+          $("input[id=cameraHeight]")[0].value = data.cameraHeight;
+
+          $("input[id=posx]")[0].value = props[data.models[0].path.trim()].posx;
+          $("input[id=posy]")[0].value = props[data.models[0].path.trim()].posy;
+          $("input[id=posz]")[0].value = props[data.models[0].path.trim()].posz;
+          $("input[id=scale]")[0].value = props[data.models[0].path.trim()].scale;
+          $("input[id=rotx]")[0].value = props[data.models[0].path.trim()].rotx;
+          $("input[id=roty]")[0].value = props[data.models[0].path.trim()].roty;
+          $("input[id=rotz]")[0].value = props[data.models[0].path.trim()].rotz;
+          $("input[id=spin]")[0].value = props[data.models[0].path.trim()].spin;
+          $("input[id=spinaxis]")[0].value = props[data.models[0].path.trim()].spinaxis;
+          $("#currentName")[0].value = data.models[0].path.trim();
         }
 
         function errorHandler(evt)
