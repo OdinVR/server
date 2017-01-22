@@ -37,9 +37,7 @@
                                 </tr>
                                 <tr>
                                     <td class = "text-left" style="width: 50%">
-                                        <a href="#">
-                                            <div class="btn btn-sm btn-odin table-button">Load</div>
-                                        </a>
+                                        <input class="btn btn-sm btn-odin table-button" id="file" type="file" multiple onchange="startRead()">
                                     </td>
 
                                     <td class="text-center">
@@ -375,9 +373,57 @@
             }
         }
 
-
-
     </script>
+
+    <script>
+        function startRead()
+        {
+          // obtain input element through DOM
+
+          var file = document.getElementById('file').files[0];
+          if(file)
+        	{
+            getAsText(file);
+          }
+        }
+
+        function getAsText(readFile)
+        {
+        	var reader;
+        	try
+        	{
+            reader = new FileReader();
+        	}catch(e)
+        	{
+        		document.getElementById('output').innerHTML =
+        			"Error: seems File API is not supported on your browser";
+        	  return;
+          }
+
+          // Read file into memory as UTF-8
+          reader.readAsText(readFile, "UTF-8");
+
+          // Handle progress, success, and errors
+          reader.onload = loaded;
+          reader.onerror = errorHandler;
+        }
+
+        function loaded(evt)
+        {
+          // Obtain the read file data
+          var fileString = evt.target.result;
+          console.log(fileString);
+        }
+
+        function errorHandler(evt)
+        {
+          if(evt.target.error.code == evt.target.error.NOT_READABLE_ERR)
+        	{
+            // The file could not be read
+        		console.log("Error reading file...");
+          }
+        }
+	</script>
 
 </body>
 
