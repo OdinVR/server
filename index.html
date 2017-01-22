@@ -43,7 +43,7 @@
                                     </td>
 
                                     <td class="text-center">
-                                        <a href="#">
+                                        <a id="download">
                                             <div class="btn btn-sm btn-odin table-button">Save</div>
                                         </a>
                                     </td>
@@ -239,6 +239,10 @@
                 receiveSceneData(dump());
             });
 
+            $('#download').on('click', function() {
+                download(dump(), 'scene.json', 'text/plain');
+            });
+
             socket.on('new message', function(data) {
 				console.log('message: '+data.message);
 			});
@@ -287,6 +291,14 @@
                 }
                 console.log(release);
                 return release;
+            }
+
+            function download(text, name, type) {
+                var a = document.createElement("a");
+                var file = new Blob([text], {type: type});
+                a.href = URL.createObjectURL(file);
+                a.download = name;
+                a.click();
             }
 
             var height = $("#3dscene").height();
