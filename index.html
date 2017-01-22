@@ -51,7 +51,7 @@
                                 <tr>
                                     <td colspan="2" class = "text-left">
                                         <a href="#">
-                                            <div class="btn btn-sm btn-odin table-button" onclick="receiveSceneData(dump());">Preview</div>
+                                            <div id="previewButton" class="btn btn-sm btn-odin table-button">Preview</div>
                                         </a>
                                     </td>
                                 </tr>
@@ -233,6 +233,8 @@
                 console.log(release);
                 socket.emit('update', release);
             });
+
+            $('#previewButton').on('click', receiveSceneData(dump()));
 
             socket.on('new message', function(data) {
 				console.log('message: '+data.message);
