@@ -171,9 +171,9 @@
                 var p;
 
                 for(var i = 0; i<modelNames.length; i++) {
-                    if(modelNames[i].name==modelname) p = modelNames[i].path;
+                    if(modelname.trim()==modelNames[i].name.trim()) p = modelNames[i].path;
                 }
-
+                console.log(p);
                 props[modelname.trim()] = {
                     path: p,
                     posx: parseInt(''+$("input[id=posx]")[0].value),
@@ -183,7 +183,7 @@
                     rotx: parseInt(''+$("input[id=rotx]")[0].value),
                     roty: parseInt(''+$("input[id=roty]")[0].value),
                     rotz: parseInt(''+$("input[id=rotz]")[0].value),
-                    spin: 'true'==$("input[id=spin]")[0].value,
+                    spin: $("input[id=spin]")[0].value,
                     spinaxis: $("input[id=spinaxis]")[0].value
                 }
 
@@ -205,7 +205,7 @@
                         rotx: props[modelNames[i].name].rotx,
                         roty: props[modelNames[i].name].roty,
                         rotz: props[modelNames[i].name].posz,
-                        spin: 'true'==props[modelNames[i].name].spin,
+                        spin: props[modelNames[i].name].spin,
                         spinaxis: props[modelNames[i].name].spinaxis
                     });
                 }
@@ -263,7 +263,7 @@
                     rotx: parseInt($("input[id=rotx]")[0].value),
                     roty: parseInt($("input[id=roty]")[0].value),
                     rotz: parseInt($("input[id=rotz]")[0].value),
-                    spin: 'true'==$("input[id=spin]")[0].value,
+                    spin: $("input[id=spin]")[0].value,
                     spinaxis: $("input[id=spinaxis]")[0].value
                 }
 
@@ -274,7 +274,7 @@
                 $("input[id=rotx]")[0].value = props[newModel.trim()].rotx;
                 $("input[id=roty]")[0].value = props[newModel.trim()].roty;
                 $("input[id=rotz]")[0].value = props[newModel.trim()].rotz;
-                $("input[id=spin]")[0].value = 'true'==props[newModel.trim()].spin;
+                $("input[id=spin]")[0].value = props[newModel.trim()].spin;
                 $("input[id=spinaxis]")[0].value = props[newModel.trim()].spinaxis;
             }
         }
