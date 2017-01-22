@@ -255,7 +255,15 @@
             var newModel = $('#currentName')[0].innerText = ''+data;
             if(prevModel!='<load model>') {
 
+                var modelname = prevModel;
+                var p;
+
+                for(var i = 0; i<modelNames.length; i++) {
+                    if(modelname.trim()==modelNames[i].name.trim()) p = modelNames[i].path;
+                }
+
                 props[prevModel.trim()] = {
+                    path: p,
                     posx: parseInt($("input[id=posx]")[0].value),
                     posy: parseInt($("input[id=posy]")[0].value),
                     posz: parseInt($("input[id=posz]")[0].value),
