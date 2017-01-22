@@ -37,6 +37,10 @@ background: linear-gradient(to right, #02AAB0 , #00CDAC); /* W3C, IE 10+/ Edge, 
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
+.table-button {
+    width:100%;
+}
+
 .property-bin {
     position: relative;
     top: 2%;

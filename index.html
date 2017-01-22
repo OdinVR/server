@@ -36,15 +36,35 @@
                                     <td class="text-right" id="sessionid"></td>
                                 </tr>
                                 <tr>
+                                    <td class = "text-left" style="width: 50%">
+                                        <a href="#">
+                                            <div class="btn btn-sm btn-odin table-button">Load</div>
+                                        </a>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <a href="#">
+                                            <div class="btn btn-sm btn-odin table-button">Save</div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class = "text-left">
+                                        <a href="#">
+                                            <div class="btn btn-sm btn-odin table-button">Preview</div>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td class="text-left">
-                                        <div class="btn-group text-center">
+                                        <div style="position:relative; left:0.4em;" class="btn-group text-center">
                                             <button class="btn btn-odin btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Models </button>
                                             <div id="modelMenu" class="dropdown-menu">
 
                                             </div>
                                         </div>
                                     </td>
-                                    <td id="currentName">
+                                    <td class="text-right" id="currentName">
                                     </td>
                                 </tr>
                                 <tr>
@@ -129,52 +149,46 @@
     <script type="text/javascript" src="js/dropzone.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    
+
 	<!--
 	  A polyfill for Promises. Needed for IE and Edge.
 	  -->
 	<script src="/vr/node_modules/es6-promise/dist/es6-promise.js"></script>
-	
+
 	<!--
 	  three.js 3d library
 	  -->
 	<script src="/vr/node_modules/three/build/three.min.js"></script>
-	
+
 	<!--
 	  VRControls.js acquires positional information from connected VR devices and applies the transformations to a three.js camera object.
 	   -->
 	<script src="/vr/node_modules/three/examples/js/controls/VRControls.js"></script>
-	
+
 	<!--
 	  VREffect.js handles stereo camera setup and rendering.
 	  -->
 	<script src="/vr/node_modules/three/examples/js/effects/VREffect.js"></script>
-	
+
 	<!--
 	  A polyfill for WebVR using the Device{Motion,Orientation}Event API.
 	  -->
 	<script src="/vr/node_modules/webvr-polyfill/build/webvr-polyfill.js"></script>
-	
+
 	<!--
 	  Helps enter and exit VR mode, provides best practices while in VR.
 	  -->
 	<script src="/vr/build/webvr-manager.js"></script>
-	
+
 	<script src="/vr/node_modules/three/examples/js/loaders/ColladaLoader.js"></script>
-	
+
 	<script src="/vr/rendering.js"></script>
-	
+
 	<script src="/vr/scenebuilder.js"></script>
-	
+
 	<script src="/vr/remote.js"></script>
-	
+
 	<script src="/vr/scene.js"></script>
-    
-    <script>
-	    var height = $("#3dscene").height();
-		var width = $("#3dscene").width();
-	    renderInPanel(width,height);
-    </script>
 
     <script>
         var modelNames = [];
@@ -214,6 +228,17 @@
 
             $('#updateButton').on('click', function() {
 
+                var release = dump();
+
+                console.log(release);
+                socket.emit('update', release);
+            });
+
+            socket.on('new message', function(data) {
+				console.log('message: '+data.message);
+			});
+
+            function dump() {
                 var modelname = $('#currentName')[0].innerText;
                 var p;
                 swapPropertyData(modelname);
@@ -223,23 +248,23 @@
                 console.log(p);
                 props[modelname.trim()] = {
                     path: p,
-                    posx: parseInt(''+$("input[id=posx]")[0].value),
-                    posy: parseInt(''+$("input[id=posy]")[0].value),
-                    posz: parseInt(''+$("input[id=posz]")[0].value),
-                    scale: parseInt(''+$("input[id=scale]")[0].value),
-                    rotx: parseInt(''+$("input[id=rotx]")[0].value),
-                    roty: parseInt(''+$("input[id=roty]")[0].value),
-                    rotz: parseInt(''+$("input[id=rotz]")[0].value),
+                    posx: parseFloat(''+$("input[id=posx]")[0].value),
+                    posy: parseFloat(''+$("input[id=posy]")[0].value),
+                    posz: parseFloat(''+$("input[id=posz]")[0].value),
+                    scale: parseFloat(''+$("input[id=scale]")[0].value),
+                    rotx: parseFloat(''+$("input[id=rotx]")[0].value),
+                    roty: parseFloat(''+$("input[id=roty]")[0].value),
+                    rotz: parseFloat(''+$("input[id=rotz]")[0].value),
                     spin: $("input[id=spin]")[0].value,
                     spinaxis: $("input[id=spinaxis]")[0].value
                 }
 
                 var release = {
                     models: [],
-                    skybox: parseInt($("input[id=skybox]")[0].value),
-                    skyboxSize: parseInt($("input[id=skyboxSize]")[0].value),
-                    skyboxPos: parseInt($("input[id=skyboxPos]")[0].value),
-                    cameraHeight: parseInt($("input[id=cameraHeight]")[0].value)
+                    skybox: $("input[id=skybox]")[0].value,
+                    skyboxSize: parseFloat($("input[id=skyboxSize]")[0].value),
+                    skyboxPos: parseFloat($("input[id=skyboxPos]")[0].value),
+                    cameraHeight: parseFloat($("input[id=cameraHeight]")[0].value)
                 }
 
                 for(var i = 0; i<modelNames.length; i++) {
@@ -257,13 +282,13 @@
                     });
                 }
 
-                console.log(release);
-                socket.emit('update', release);
-            });
+                return release;
+            }
 
-            socket.on('new message', function(data) {
-				console.log('message: '+data.message);
-			});
+            var height = $("#3dscene").height();
+    		var width = $("#3dscene").width();
+    	    renderInPanel(width,height);
+            receiveSceneData(dump());
 
         });
 
@@ -311,13 +336,13 @@
 
                 props[prevModel.trim()] = {
                     path: p,
-                    posx: parseInt($("input[id=posx]")[0].value),
-                    posy: parseInt($("input[id=posy]")[0].value),
-                    posz: parseInt($("input[id=posz]")[0].value),
-                    scale: parseInt($("input[id=scale]")[0].value),
-                    rotx: parseInt($("input[id=rotx]")[0].value),
-                    roty: parseInt($("input[id=roty]")[0].value),
-                    rotz: parseInt($("input[id=rotz]")[0].value),
+                    posx: parseFloat($("input[id=posx]")[0].value),
+                    posy: parseFloat($("input[id=posy]")[0].value),
+                    posz: parseFloat($("input[id=posz]")[0].value),
+                    scale: parseFloat($("input[id=scale]")[0].value),
+                    rotx: parseFloat($("input[id=rotx]")[0].value),
+                    roty: parseFloat($("input[id=roty]")[0].value),
+                    rotz: parseFloat($("input[id=rotz]")[0].value),
                     spin: $("input[id=spin]")[0].value,
                     spinaxis: $("input[id=spinaxis]")[0].value
                 }
