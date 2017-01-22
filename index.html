@@ -240,7 +240,7 @@
             });
 
             $('#download').on('click', function() {
-                download(dump(), 'scene.json', 'text/plain');
+                download(JSON.stringify(dump()), 'scene.json', 'text/plain');
             });
 
             socket.on('new message', function(data) {
