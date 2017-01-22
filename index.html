@@ -247,7 +247,6 @@
                 for(var i = 0; i<modelNames.length; i++) {
                     if(modelname.trim()==modelNames[i].name.trim()) p = modelNames[i].path;
                 }
-                console.log(p);
                 props[modelname.trim()] = {
                     path: p,
                     posx: parseFloat(''+$("input[id=posx]")[0].value),
@@ -283,7 +282,7 @@
                         spinaxis: props[modelNames[i].name].spinaxis
                     });
                 }
-
+                console.log(release);
                 return release;
             }
 
