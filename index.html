@@ -234,7 +234,10 @@
                 socket.emit('update', release);
             });
 
-            $('#previewButton').on('click', receiveSceneData(dump()));
+            $('#previewButton').on('click', function() {
+                console.log('clicked');
+                receiveSceneData(dump());
+            });
 
             socket.on('new message', function(data) {
 				console.log('message: '+data.message);
